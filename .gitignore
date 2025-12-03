@@ -12,15 +12,6 @@
 
 # Asset meta data should be tracked, but not the asset store tools
 [Aa]ssets/AssetStoreTools*
-Assets/Assets
-Assets/GinjaGaming
-Assets/GUI_Parts
-Assets/Nicrom
-Assets/Prefabs
-Assets/Proxy Games
-Assets/RPG_inventory_icons
-
-
 
 
 # Auto-generated Jetbrains Rider plugin

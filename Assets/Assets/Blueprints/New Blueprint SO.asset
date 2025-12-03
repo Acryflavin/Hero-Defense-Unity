@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748c3d7c6eb154e44994a94c53d0b640, type: 3}
+  m_Name: New Blueprint SO
+  m_EditorClassIdentifier: Assembly-CSharp::BlueprintSO
+  category: Tools
+  itemName: 
+  req1: 
+  req1Amount: 0
+  req2: 
+  req2Amount: 0
