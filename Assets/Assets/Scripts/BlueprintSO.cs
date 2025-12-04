@@ -3,17 +3,21 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Crafting/Blueprint")]
 public class BlueprintSO : ScriptableObject
 {
-    public Sprite icon;  // this is the picture for the item
-
-    public string category = "Tools";
-
+    [Header("Result Item")]
     public string itemName;
+    public Sprite icon;
 
     [Header("Requirement 1")]
     public string req1;
-    public int req1Amount;
+    public int req1Amount = 1;
 
-    [Header("Requirement 2 (optional)")]
+    [Header("Requirement 2")]
     public string req2;
-    public int req2Amount;
+    public int req2Amount = 0;
+
+    [Header("Category")]
+    public string category = "Tools";
+
+    public bool HasSecondRequirement =>
+        !string.IsNullOrEmpty(req2) && req2Amount > 0;
 }

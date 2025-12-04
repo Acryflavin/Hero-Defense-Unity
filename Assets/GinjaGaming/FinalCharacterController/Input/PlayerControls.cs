@@ -116,7 +116,7 @@ namespace GinjaGaming.FinalCharacterController
                     ""name"": ""ToggleSprint"",
                     ""type"": ""Button"",
                     ""id"": ""2d62136a-c146-4b49-b506-7d903b95e54a"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -253,17 +253,6 @@ namespace GinjaGaming.FinalCharacterController
                 },
                 {
                     ""name"": """",
-                    ""id"": ""3df7d211-c245-424c-a1f6-114ddf272b10"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""62632ce9-27da-473b-9c43-5784ec4992a5"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
@@ -294,6 +283,39 @@ namespace GinjaGaming.FinalCharacterController
                     ""action"": ""ToggleWalk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""109db04c-adb7-4fec-b2fa-7d8a8bcf9615"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Modifier"",
+                    ""id"": ""a202490e-1c7d-43b0-9042-0b1e18d7d9a6"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Binding"",
+                    ""id"": ""ea00a781-77e2-40f5-abcc-5db4f5a0e278"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -333,7 +355,7 @@ namespace GinjaGaming.FinalCharacterController
                     ""name"": ""Gathering"",
                     ""type"": ""Button"",
                     ""id"": ""d9ba9315-bc1d-4791-ad3e-9601169f85de"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -363,7 +385,7 @@ namespace GinjaGaming.FinalCharacterController
                 {
                     ""name"": """",
                     ""id"": ""e6f26d82-02fe-4ade-9b05-d4f8c0a271d2"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

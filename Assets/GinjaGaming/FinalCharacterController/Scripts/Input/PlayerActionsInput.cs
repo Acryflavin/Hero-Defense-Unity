@@ -75,7 +75,32 @@ namespace GinjaGaming.FinalCharacterController
             if (!context.performed)
                 return;
 
-            GatherPressed = true;
+            if (CanPickupItem())
+            {
+                GatherPressed = true;
+            }
+        }
+
+        private bool CanPickupItem()
+        {
+            if (SelectionManager.Instance == null)
+                return false;
+
+            if (!SelectionManager.Instance.onTarget || SelectionManager.Instance.selectedObject == null)
+                return false;
+
+            InteractableObject interactable = SelectionManager.Instance.selectedObject.GetComponent<InteractableObject>();
+
+            if (interactable == null)
+                return false;
+
+            if (!interactable.playerInRange)
+                return false;
+
+            if (InventorySystem.Instance.CheckIfFull())
+                return false;
+
+            return true;
         }
 
         public void OnAttacking(InputAction.CallbackContext context)

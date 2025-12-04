@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CraftingSystem : MonoBehaviour
 {
     public void SetCategory(string category)
     {
         currentCategory = category;
-        //BuildRecipeUI();   // refreshes the recipe list
+        BuildRecipeUI();   // refreshes the recipe list
     }
 
 
-    private string currentCategory = "All";
+    private string currentCategory = "";
 
 
     [Header("UI References")]
@@ -30,9 +29,8 @@ public class CraftingSystem : MonoBehaviour
     {
         if (craftingScreenUI != null)
             craftingScreenUI.SetActive(false);
-
-        InitializeUI();
     }
+
 
     private void Update()
     {
@@ -54,9 +52,15 @@ public class CraftingSystem : MonoBehaviour
 
         if (craftingScreenUI != null)
             craftingScreenUI.SetActive(_isOpen);
+
+        //if (_isOpen)
+        //{
+        //    BuildRecipeUI();  // Build UI when opening
+        //}
     }
 
-    private void InitializeUI()
+
+    private void BuildRecipeUI()
     {
         if (recipeUIPrefab == null)
         {
@@ -70,14 +74,42 @@ public class CraftingSystem : MonoBehaviour
             return;
         }
 
+        // Clear existing recipe UI
+        foreach (Transform child in recipeContainer)
+        {
+            Destroy(child.gameObject);
+        }
+        _recipeUIDict.Clear();
+
+        // If no category selected, don't show anything
+        if (string.IsNullOrEmpty(currentCategory))
+        {
+            Debug.Log("No category selected yet.");
+            return;
+        }
+
+        Debug.Log($"Building UI for category: {currentCategory}");
+        Debug.Log($"Total blueprints in list: {blueprints.Count}");
+
+        // Create UI for blueprints matching the current category
+        int matchCount = 0;
         foreach (var bp in blueprints)
         {
-            if (currentCategory != "All" && bp.category != currentCategory)
-                continue;
-
             if (bp == null)
+            {
+                Debug.LogWarning("Null blueprint in list!");
                 continue;
+            }
 
+            Debug.Log($"Blueprint: {bp.itemName}, Category: {bp.category}");
+
+            if (currentCategory != "All" && bp.category != currentCategory)
+            {
+                Debug.Log($"  Skipping {bp.itemName} - doesn't match {currentCategory}");
+                continue;
+            }
+
+            matchCount++;
             var uiGO = Instantiate(recipeUIPrefab, recipeContainer);
             uiGO.name = $"Recipe_{bp.itemName}";
             var ui = uiGO.GetComponent<RecipeUI>();
@@ -91,7 +123,12 @@ public class CraftingSystem : MonoBehaviour
             ui.Initialize(bp, () => Craft(bp));
             _recipeUIDict[bp] = ui;
         }
+
+        Debug.Log($"Created {matchCount} recipe UI elements for category {currentCategory}");
     }
+
+
+
 
     private void Craft(BlueprintSO bp)
     {

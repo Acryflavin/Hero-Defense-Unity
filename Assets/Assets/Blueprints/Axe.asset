@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748c3d7c6eb154e44994a94c53d0b640, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: Assembly-CSharp::BlueprintSO
-  icon: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
-  category: Tools
   itemName: Axe
+  icon: {fileID: 21300000, guid: 172774604c1bee84185a69041576525b, type: 3}
   req1: Stone
-  req1Amount: 3
+  req1Amount: 1
   req2: Stick
-  req2Amount: 3
+  req2Amount: 2
+  category: Weapons
