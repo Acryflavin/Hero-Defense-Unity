@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,24 +7,27 @@ public class CraftingSystem : MonoBehaviour
     public void SetCategory(string category)
     {
         currentCategory = category;
-        BuildRecipeUI();   // refreshes the recipe list
+        BuildRecipeUI();
     }
-
 
     private string currentCategory = "";
 
-
     [Header("UI References")]
-    public GameObject craftingScreenUI;   // Panel that holds the whole crafting window
-    public Transform recipeContainer;     // Parent for recipe UI entries
-    public GameObject recipeUIPrefab;     // Prefab with RecipeUI on it
+    public GameObject craftingScreenUI;
+    public Transform recipeContainer;
+    public GameObject recipeUIPrefab;
 
     [Header("Blueprints")]
     public List<BlueprintSO> blueprints = new List<BlueprintSO>();
 
-    private readonly Dictionary<BlueprintSO, RecipeUI> _recipeUIDict = new Dictionary<BlueprintSO, RecipeUI>();
+    [Header("Crafting Feedback")]
+    public AudioClip craftSound;
+    public AudioClip craftingSound;
+    public ParticleSystem craftParticles;
 
+    private readonly Dictionary<BlueprintSO, RecipeUI> _recipeUIDict = new Dictionary<BlueprintSO, RecipeUI>();
     private bool _isOpen;
+    private bool _isCrafting;
 
     private void Start()
     {
@@ -31,16 +35,14 @@ public class CraftingSystem : MonoBehaviour
             craftingScreenUI.SetActive(false);
     }
 
-
     private void Update()
     {
-        // Toggle crafting menu with K
         if (Input.GetKeyDown(KeyCode.K))
         {
             ToggleCrafting();
         }
 
-        if (_isOpen)
+        if (_isOpen && !_isCrafting)
         {
             RefreshAllRecipes();
         }
@@ -52,93 +54,91 @@ public class CraftingSystem : MonoBehaviour
 
         if (craftingScreenUI != null)
             craftingScreenUI.SetActive(_isOpen);
-
-        //if (_isOpen)
-        //{
-        //    BuildRecipeUI();  // Build UI when opening
-        //}
     }
-
 
     private void BuildRecipeUI()
     {
-        if (recipeUIPrefab == null)
-        {
-            Debug.LogError("CraftingSystem: recipeUIPrefab is not assigned.");
+        if (recipeUIPrefab == null || recipeContainer == null)
             return;
-        }
 
-        if (recipeContainer == null)
-        {
-            Debug.LogError("CraftingSystem: recipeContainer is not assigned.");
-            return;
-        }
-
-        // Clear existing recipe UI
         foreach (Transform child in recipeContainer)
         {
             Destroy(child.gameObject);
         }
         _recipeUIDict.Clear();
 
-        // If no category selected, don't show anything
         if (string.IsNullOrEmpty(currentCategory))
-        {
-            Debug.Log("No category selected yet.");
             return;
-        }
 
-        Debug.Log($"Building UI for category: {currentCategory}");
-        Debug.Log($"Total blueprints in list: {blueprints.Count}");
+        List<BlueprintSO> filteredBlueprints = new List<BlueprintSO>();
 
-        // Create UI for blueprints matching the current category
-        int matchCount = 0;
         foreach (var bp in blueprints)
         {
             if (bp == null)
-            {
-                Debug.LogWarning("Null blueprint in list!");
                 continue;
-            }
 
-            Debug.Log($"Blueprint: {bp.itemName}, Category: {bp.category}");
-
-            if (currentCategory != "All" && bp.category != currentCategory)
+            if (currentCategory == "All" || bp.category == currentCategory)
             {
-                Debug.Log($"  Skipping {bp.itemName} - doesn't match {currentCategory}");
-                continue;
+                filteredBlueprints.Add(bp);
             }
+        }
 
-            matchCount++;
+        foreach (var bp in filteredBlueprints)
+        {
             var uiGO = Instantiate(recipeUIPrefab, recipeContainer);
             uiGO.name = $"Recipe_{bp.itemName}";
             var ui = uiGO.GetComponent<RecipeUI>();
 
             if (ui == null)
-            {
-                Debug.LogError("CraftingSystem: recipeUIPrefab is missing RecipeUI component.");
                 continue;
-            }
 
-            ui.Initialize(bp, () => Craft(bp));
+            ui.Initialize(bp, () => StartCraft(bp));
             _recipeUIDict[bp] = ui;
         }
-
-        Debug.Log($"Created {matchCount} recipe UI elements for category {currentCategory}");
     }
 
-
-
-
-    private void Craft(BlueprintSO bp)
+    private void StartCraft(BlueprintSO bp)
     {
-        if (bp == null)
+        if (bp == null || _isCrafting)
             return;
 
-        // Add crafted item
+        bool canCraft = CanCraft(bp);
+
+        if (!canCraft)
+        {
+            Debug.Log("Cannot craft - missing requirements!");
+            return;
+        }
+
+        StartCoroutine(CraftCoroutine(bp));
+    }
+
+    private IEnumerator CraftCoroutine(BlueprintSO bp)
+    {
+        _isCrafting = true;
+
+        RecipeUI ui = _recipeUIDict[bp];
+        if (ui != null)
+        {
+            ui.StartCraftingAnimation(bp.craftTime);
+        }
+
+        if (craftingSound != null)
+        {
+            AudioSource.PlayClipAtPoint(craftingSound, Camera.main.transform.position, 0.5f);
+        }
+
+        yield return new WaitForSeconds(bp.craftTime);
+
+        CompleteCraft(bp);
+
+        _isCrafting = false;
+    }
+
+    private void CompleteCraft(BlueprintSO bp)
+    {
         InventorySystem.Instance.AddToInventory(bp.itemName);
 
-        // Remove requirements
         if (!string.IsNullOrEmpty(bp.req1))
             InventorySystem.Instance.RemoveItem(bp.req1, bp.req1Amount);
 
@@ -147,7 +147,34 @@ public class CraftingSystem : MonoBehaviour
 
         InventorySystem.Instance.ReCalculateList();
 
+        PlayCraftFeedback();
         RefreshAllRecipes();
+    }
+
+    private bool CanCraft(BlueprintSO bp)
+    {
+        bool canCraft = true;
+
+        if (!string.IsNullOrEmpty(bp.req1))
+            canCraft &= InventorySystem.Instance.GetItemCount(bp.req1) >= bp.req1Amount;
+
+        if (!string.IsNullOrEmpty(bp.req2))
+            canCraft &= InventorySystem.Instance.GetItemCount(bp.req2) >= bp.req2Amount;
+
+        return canCraft;
+    }
+
+    private void PlayCraftFeedback()
+    {
+        if (craftSound != null)
+        {
+            AudioSource.PlayClipAtPoint(craftSound, Camera.main.transform.position);
+        }
+
+        if (craftParticles != null)
+        {
+            craftParticles.Play();
+        }
     }
 
     private void RefreshAllRecipes()
@@ -172,31 +199,8 @@ public class CraftingSystem : MonoBehaviour
         if (!string.IsNullOrEmpty(bp.req2))
             req2Count = InventorySystem.Instance.GetItemCount(bp.req2);
 
-        if (ui.req1Text != null && !string.IsNullOrEmpty(bp.req1))
-            ui.req1Text.text = $"{bp.req1Amount} {bp.req1} [{req1Count}]";
+        bool canCraft = CanCraft(bp);
 
-        if (ui.req2Text != null)
-        {
-            if (!string.IsNullOrEmpty(bp.req2))
-            {
-                ui.req2Text.gameObject.SetActive(true);
-                ui.req2Text.text = $"{bp.req2Amount} {bp.req2} [{req2Count}]";
-            }
-            else
-            {
-                ui.req2Text.gameObject.SetActive(false);
-            }
-        }
-
-        bool canCraft = true;
-
-        if (!string.IsNullOrEmpty(bp.req1))
-            canCraft &= req1Count >= bp.req1Amount;
-
-        if (!string.IsNullOrEmpty(bp.req2))
-            canCraft &= req2Count >= bp.req2Amount;
-
-        if (ui.craftButton != null)
-            ui.craftButton.interactable = canCraft;
+        ui.Refresh(req1Count, req2Count, canCraft);
     }
 }

@@ -1,35 +1,42 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
-
     public static InventorySystem Instance { get; set; }
 
     public GameObject inventoryScreenUI;
-
     public List<GameObject> slotList = new List<GameObject>();
-
     public List<String> itemList = new List<String>();
 
     private GameObject itemToAdd;
-
     private GameObject whatSlotToEquip;
-
     public bool isOpen;
+
+    //Pickup Popup
+    public GameObject pickupAlert;
+    public Text pickupName;
+    public Image pickupImage;
+
 
     public int GetItemCount(string itemName)
     {
         int count = 0;
-        foreach (var item in itemList)
-            if (item == itemName)
-                count++;
-
+        foreach (GameObject slot in slotList)
+        {
+            if (slot.transform.childCount > 0)
+            {
+                ItemStack stack = slot.transform.GetChild(0).GetComponent<ItemStack>();
+                if (stack != null && stack.itemName == itemName)
+                {
+                    count += stack.quantity;
+                }
+            }
+        }
         return count;
     }
-
-    //public bool isFull;
 
     private void Awake()
     {
@@ -43,11 +50,9 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-
     void Start()
     {
         isOpen = false;
-
         PopulateSlotList();
     }
 
@@ -62,17 +67,13 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.I) && !isOpen)
         {
-
             Debug.Log("i is pressed");
             inventoryScreenUI.SetActive(true);
             isOpen = true;
-
         }
         else if (Input.GetKeyDown(KeyCode.I) && isOpen)
         {
@@ -81,16 +82,66 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-
-
     public void AddToInventory(string itemName)
     {
-        whatSlotToEquip = FindNextEmptySlot();
+        GameObject existingStack = FindStackableSlot(itemName);
 
-        itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
-        itemToAdd.transform.SetParent(whatSlotToEquip.transform);
+        if (existingStack != null)
+        {
+            ItemStack stack = existingStack.transform.GetChild(0).GetComponent<ItemStack>();
+            stack.AddToStack(1);
+        }
+        else
+        {
+            whatSlotToEquip = FindNextEmptySlot();
+            itemToAdd = Instantiate(Resources.Load<GameObject>(itemName), whatSlotToEquip.transform.position, whatSlotToEquip.transform.rotation);
+            itemToAdd.transform.SetParent(whatSlotToEquip.transform);
 
-        itemList.Add(itemName);
+            ItemStack newStack = itemToAdd.GetComponent<ItemStack>();
+            if (newStack == null)
+            {
+                newStack = itemToAdd.AddComponent<ItemStack>();
+            }
+            newStack.itemName = itemName;
+            newStack.quantity = 1;
+            newStack.UpdateQuantityDisplay();
+
+            if (itemToAdd.GetComponent<InventoryItemTooltip>() == null)
+            {
+                itemToAdd.AddComponent<InventoryItemTooltip>();
+            }
+        }
+
+        TriggerPickupPopUp(itemName, itemToAdd.GetComponent<Image>().sprite);
+
+        ReCalculateList();
+    }
+
+
+    void TriggerPickupPopUp(string itemName, Sprite itemSprite)
+    {
+        pickupAlert.SetActive(true);
+        pickupName.text = itemName;
+        pickupImage.sprite = itemSprite;
+
+
+
+    }
+
+    private GameObject FindStackableSlot(string itemName)
+    {
+        foreach (GameObject slot in slotList)
+        {
+            if (slot.transform.childCount > 0)
+            {
+                ItemStack stack = slot.transform.GetChild(0).GetComponent<ItemStack>();
+                if (stack != null && stack.itemName == itemName && stack.CanAddToStack())
+                {
+                    return slot;
+                }
+            }
+        }
+        return null;
     }
 
     private GameObject FindNextEmptySlot()
@@ -103,7 +154,6 @@ public class InventorySystem : MonoBehaviour
             }
         }
         return new GameObject();
-
     }
 
     public bool CheckIfFull()
@@ -115,14 +165,12 @@ public class InventorySystem : MonoBehaviour
             {
                 counter += 1;
             }
-
         }
 
-        if (counter == 21)
+        if (counter == slotList.Count)
         {
             return true;
         }
-
         else
         {
             return false;
@@ -131,23 +179,31 @@ public class InventorySystem : MonoBehaviour
 
     public void RemoveItem(string nameToRemove, int amountToRemove)
     {
-        int counter = amountToRemove;
+        int remainingToRemove = amountToRemove;
 
         for (var i = slotList.Count - 1; i >= 0; i--)
         {
             if (slotList[i].transform.childCount > 0)
             {
-                if (slotList[i].transform.GetChild(0).name == nameToRemove + "(Clone)" && counter != 0)
+                ItemStack stack = slotList[i].transform.GetChild(0).GetComponent<ItemStack>();
+
+                if (stack != null && stack.itemName == nameToRemove && remainingToRemove > 0)
                 {
-                    Destroy(slotList[i].transform.GetChild(0).gameObject);
-
-                    counter -= 1;
+                    if (stack.quantity <= remainingToRemove)
+                    {
+                        remainingToRemove -= stack.quantity;
+                        Destroy(slotList[i].transform.GetChild(0).gameObject);
+                    }
+                    else
+                    {
+                        stack.RemoveFromStack(remainingToRemove);
+                        remainingToRemove = 0;
+                    }
                 }
-
             }
-
         }
 
+        ReCalculateList();
     }
 
     public void ReCalculateList()
@@ -158,18 +214,15 @@ public class InventorySystem : MonoBehaviour
         {
             if (slot.transform.childCount > 0)
             {
-                string name = slot.transform.GetChild(0).name; //Item (Clone)
-                string str2 = "(Clone)";
-                string result = name.Replace(str2, "");
-
-                itemList.Add(result);
+                ItemStack stack = slot.transform.GetChild(0).GetComponent<ItemStack>();
+                if (stack != null)
+                {
+                    for (int i = 0; i < stack.quantity; i++)
+                    {
+                        itemList.Add(stack.itemName);
+                    }
+                }
             }
-
         }
-
     }
-
- 
-
-
 }

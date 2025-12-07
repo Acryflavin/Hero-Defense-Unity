@@ -18,6 +18,9 @@ public class BlueprintSO : ScriptableObject
     [Header("Category")]
     public string category = "Tools";
 
+    [Header("Crafting Settings")]
+    public float craftTime = 2f;
+
     public bool HasSecondRequirement =>
         !string.IsNullOrEmpty(req2) && req2Amount > 0;
 }
