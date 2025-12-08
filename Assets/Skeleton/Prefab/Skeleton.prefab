@@ -1,0 +1,321 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8516156209441235525
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 35.465042
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.998169
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 61.57
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.14627606
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9892438
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 163.178
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_Name
+      value: Skeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4fdcc413d41b2ba44b6ebb2d8bb7fcdd, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8213701686862956692}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2097879821930234084}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2956530156522922975}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2880793721827921179}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7497804685864878822}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8259900662878013177}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6827290545995786967}
+  m_SourcePrefab: {fileID: 100100000, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+--- !u!95 &2829917917779058644 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+  m_PrefabInstance: {fileID: 8516156209441235525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8189179709687727534 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+  m_PrefabInstance: {fileID: 8516156209441235525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8858051749441068820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c0e8ec4be6a4d554881a5c8bb6d0c0cf, type: 3}
+  m_PrefabInstance: {fileID: 8516156209441235525}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8213701686862956692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858051749441068820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5560d0e9a92bab9408c2ccd1533779e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: HeroCombat.Runtime::HeroCharacter.CharacterCombatAgent
+  combatSettings:
+    maxHealth: 100
+    startingHealthFraction: 1
+    attackDamage: 10
+    attackDamageVariance: 0.3
+    attackCooldown: 0.6
+    blockDamageMultiplier: 1
+    postHitInvulnerability: 0
+    defaultAttackDamageType: 0
+  hudProvider: {fileID: 0}
+  autoFindHudInChildren: 1
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onRevived:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttackStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttackPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlockStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2097879821930234084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858051749441068820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375d07cb9de2429bb2b61598ae1099e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: HeroCombat.Runtime::HeroCharacter.NpcWorldspaceHealthBar
+  combatAgent: {fileID: 8213701686862956692}
+  autoBindAgent: 1
+  anchor: {fileID: 8189179709687727534}
+  worldOffset: {x: 0, y: 1.6, z: 0}
+  uniformScale: 1
+  barSize: {x: 1.2, y: 0.18}
+  alwaysVisible: 0
+  faceCamera: 1
+  cameraOverride: {fileID: 0}
+  sortingOrder: 10
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0.7}
+  fillColor: {r: 0.92, g: 0.2, b: 0.2, a: 1}
+  damageColor: {r: 1, g: 0.8, b: 0.25, a: 0.75}
+  fillLerpSpeed: 10
+  damageLerpSpeed: 3
+  fadeSpeed: 6
+  visibilityDuration: 2
+  barRoot: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  fillImage: {fileID: 0}
+  damageImage: {fileID: 0}
+  slider: {fileID: 0}
+  canvas: {fileID: 0}
+  canvasGroup: {fileID: 0}
+--- !u!114 &2956530156522922975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858051749441068820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 495a2c12b07346fb883bdad5931801b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: HeroCombat.Runtime::HeroCharacter.FloatingCombatTextSpawner
+  anchor: {fileID: 8189179709687727534}
+  spawnOffset: {x: 0, y: 2.1, z: 0}
+  faceCamera: 1
+  cameraOverride: {fileID: 0}
+  lightDamageColor: {r: 0.235, g: 0.776, b: 0.851, a: 1}
+  heavyDamageColor: {r: 0.235, g: 0.776, b: 0.851, a: 1}
+  heavyDamageThreshold: 40
+  sizeJitter: 0.1
+  lifetime: 1.4
+  riseSpeed: 1.5
+  horizontalJitter: {x: -0.2, y: 0.2}
+  verticalJitter: {x: 0, y: 0.2}
+  prefab: {fileID: 0}
+  fontOverride: {fileID: 0}
+--- !u!114 &2880793721827921179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858051749441068820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd2079a8b15e5f141a882d6263431739, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: HeroCombat.Runtime::HeroCharacter.NpcCombatController
+  autoTargetHero: 0
+  heroTargetOverride: {fileID: 0}
+  acquireRange: 5
+  attackRange: 1.9
+  turnSpeed: 7
+  leashRange: 10
+  returnSpeed: 3
+  enableMovement: 1
+  allowSprint: 1
+  walkSpeed: 1.5
+  sprintSpeed: 3
+  sprintDistance: 3
+  stoppingBuffer: 0.25
+  damageScale: 1
+  attackDelay: 1
+  attachHealthBar: 1
+  healthBarOffset: {x: 0, y: 1.6, z: 0}
+  healthBarSize: {x: 1.2, y: 0.18}
+  healthBarScale: 1
+  healthBarAlwaysVisible: 0
+  healthBarConfigVersion: 1
+  attachFloatingText: 1
+  floatingTextOffset: {x: 0, y: 2.1, z: 0}
+  floatingTextColor: {r: 0.235, g: 0.776, b: 0.851, a: 1}
+  ignoreTargetCollisions: 1
+  snapToGround: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 115
+  groundCheckDistance: 2
+  groundOffset: 0.02
+  groundSnapSpeed: 15
+--- !u!114 &7497804685864878822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858051749441068820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ad34edcaa15314db264ce135b2700f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: HeroCombat.Runtime::HeroCharacter.NpcAnimatorDriver
+  animator: {fileID: 2829917917779058644}
+  body: {fileID: 0}
+  speedFloat: Vel
+  idleBool: Idle
+  groundedBool: Grounded
+  sprintBool: Sprinting
+  attackTrigger: Attacking
+  damageTrigger: Damage
+  deathTrigger: Death
+  idleThreshold: 0.05
+  sprintThreshold: 3.5
+  assumeGrounded: 1
+--- !u!114 &8259900662878013177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858051749441068820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f35616988ef8d4c9f62f6d78a9e2c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: HeroCombat.Runtime::HeroCharacter.AnimatorAttackWindowDriver
+  animator: {fileID: 2829917917779058644}
+  weapon: {fileID: 0}
+  combatAgent: {fileID: 8213701686862956692}
+  windows:
+  - stateName: Attack
+    layerIndex: 1
+    startNormalizedTime: 0.3
+    endNormalizedTime: 0.45
+    resetBuffer: 0.05
+--- !u!136 &6827290545995786967
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8858051749441068820}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}

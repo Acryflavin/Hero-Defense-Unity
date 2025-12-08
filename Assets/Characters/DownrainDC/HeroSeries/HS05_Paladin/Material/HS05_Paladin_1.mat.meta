@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: acc1b44072503ac41ba8b1b09ce10e82
+timeCreated: 1532159761
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 314374
+  packageName: HS - Paladin
+  packageVersion: 1.0
+  assetPath: Assets/DownrainDC/HeroSeries/HS05_Paladin/Material/HS05_Paladin_1.mat
+  uploadId: 776220

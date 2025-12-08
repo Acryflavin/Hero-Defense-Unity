@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Slot
   - Ground
+  - Player
+  - Enemy
   layers:
   - Default
   - TransparentFX
